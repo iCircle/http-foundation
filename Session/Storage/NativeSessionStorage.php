@@ -135,10 +135,12 @@ class NativeSessionStorage implements SessionStorageInterface
             throw new \RuntimeException('Failed to start the session: already started by PHP.');
         }
 
+        /**
+         * Commenting this , because this will break in hosting server
         if (PHP_VERSION_ID < 50400 && !$this->closed && isset($_SESSION) && session_id()) {
             // not 100% fool-proof, but is the most reliable way to determine if a session is active in PHP 5.3
             throw new \RuntimeException('Failed to start the session: already started by PHP ($_SESSION is set).');
-        }
+        }*/
 
         if (ini_get('session.use_cookies') && headers_sent($file, $line)) {
             throw new \RuntimeException(sprintf('Failed to start the session because headers have already been sent by "%s" at line %d.', $file, $line));
